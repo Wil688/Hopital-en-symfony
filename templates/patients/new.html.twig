@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Nouveau Patient{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un nouveau patient</h1>
+
+    {{ include('patients/_form.html.twig') }}
+
+    <div class="mb-3">
+        <a class="btn btn-primary" href="{{ path('patients_index') }}">Retour</a>
+    </div>
+{% endblock %}

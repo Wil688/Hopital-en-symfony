@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Patients index{% endblock %}
+
+{% block body %}
+    <h1>Liste des patients</h1>
+
+    <table class="table table-primary table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de naissance</th>
+                <th>Email</th>
+                <th>N° carte vitale</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for patient in patients %}
+            <tr>
+                <td>{{ patient.id }}</td>
+                <td>{{ patient.lastname }}</td>
+                <td>{{ patient.firstname }}</td>
+                <td>{{ patient.birthDate ? patient.birthDate|date('Y-m-d') : '' }}</td>
+                <td>{{ patient.email }}</td>
+                <td>{{ patient.vitalcardNumber }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('patients_show', {'id': patient.id}) }}">Afficher</a>
+                    <a class="btn btn-secondary" href="{{ path('patients_edit', {'id': patient.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Pas de patients enregister</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('patients_new') }}">Ajouter un patients</a>
+{% endblock %}
