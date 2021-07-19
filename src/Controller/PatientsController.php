@@ -10,9 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-// Supprimer la route pour que au lancement nous allons directement sur l'index patient
-/*
-@Route("/patients")
+/**
+ * @Route("/")
  */
 class PatientsController extends AbstractController
 {
@@ -23,6 +22,16 @@ class PatientsController extends AbstractController
     {
         return $this->render('patients/index.html.twig', [
             'patients' => $patientsRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/", name="patients_search", methods={"POST"})
+     */
+    public function search(PatientsRepository $patientsRepository, Request $request): Response
+    {
+        return $this->render('patients/index.html.twig', [
+            'patients' => $patientsRepository->findByNameOrFirstname($request->get('search')),
         ]);
     }
    

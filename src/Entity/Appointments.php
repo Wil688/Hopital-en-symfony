@@ -28,10 +28,11 @@ class Appointments
     private $endTime;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Patients::class)
+     * @ORM\ManyToOne(targetEntity=Patients::class, inversedBy="appointments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $patients;
+    private $Patients;
+
 
 
     public function getId(): ?int
@@ -65,14 +66,15 @@ class Appointments
 
     public function getPatients(): ?Patients
     {
-        return $this->patients;
+        return $this->Patients;
     }
 
-    public function setPatients(?Patients $patients): self
+    public function setPatients(?Patients $Patients): self
     {
-        $this->patients = $patients;
+        $this->Patients = $Patients;
 
         return $this;
     }
+
 
 }
